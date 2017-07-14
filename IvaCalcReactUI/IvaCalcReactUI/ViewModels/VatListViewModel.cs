@@ -48,9 +48,8 @@ namespace IvaCalcReactUI.ViewModels
             throw new NotImplementedException();
 
             // Navigator.Push<>()
+            // Navigate to viewModel
             // HostScreen.Router.Navigate.Execute(new DetailViewModel(item)).Subscribe();
         }
-
-
     }
 }

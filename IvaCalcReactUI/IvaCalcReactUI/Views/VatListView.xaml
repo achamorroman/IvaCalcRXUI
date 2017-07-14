@@ -6,14 +6,12 @@
                           xmlns:rxui="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
                           xmlns:viewModels="clr-namespace:IvaCalcReactUI.ViewModels;assembly=IvaCalcReactUI"
                           Title="Detalle de tipos de IVA">
-  <ContentPage.Content>
-    <StackLayout>
+  <StackLayout>
 
-      <Label x:Name="Amount"></Label>
-      <Label x:Name="Units"></Label>
+    <Label x:Name="Amount"></Label>
+    <Label x:Name="Units"></Label>
 
-      <Label Text="SECOND VIEW"></Label>
-    </StackLayout>
-  </ContentPage.Content>
+    <Label Text="SECOND VIEW"></Label>
+  </StackLayout>
 
 </rxui:ReactiveContentPage>

@@ -17,13 +17,7 @@ namespace IvaCalcReactUI
             InitializeComponent();
 
             var appBootstrapper = new AppBootstrapper();
-
-            // var navPage = Locator.Current.GetService<MainView>();
-
-            var initialPage = new MainView();
-            initialPage.ViewModel = new MainViewModel();
-
-            MainPage = initialPage;
+            MainPage = appBootstrapper.GetMainPage();
         }
 
         protected override void OnStart()

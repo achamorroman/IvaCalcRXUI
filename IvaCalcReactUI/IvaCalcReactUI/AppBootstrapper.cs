@@ -16,9 +16,6 @@ namespace IvaCalcReactUI
     {
         public AppBootstrapper()
         {
-            // IScreen - No lo implementamos
-            // Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
-
             // Services
             Locator.CurrentMutable.RegisterLazySingleton(() => new NavigationService(), typeof(INavigationService));
 
@@ -26,8 +23,16 @@ namespace IvaCalcReactUI
             Locator.CurrentMutable.RegisterLazySingleton(() => new MainView(), typeof(IViewFor<MainViewModel>));
             Locator.CurrentMutable.RegisterLazySingleton(() => new VatListView(), typeof(IViewFor<VatListViewModel>));
 
-            // Routing
+            // Sample: Obtain view from locator
+            // Locator.Current.GetService<IViewFor<MainViewModel>>();
+        }
 
+        public NavigationPage GetMainPage()
+        {
+            var initialPage = new MainView();
+            initialPage.ViewModel = new MainViewModel();
+
+            return new NavigationPage(initialPage);
         }
     }
 }

@@ -17,12 +17,13 @@ namespace IvaCalcReactUI
             InitializeComponent();
 
             var appBootstrapper = new AppBootstrapper();
-            // var navpage = (NavigationPage)appBootstrapper.CreateMainPage();
-            //navpage.BarBackgroundColor = Color.FromHex("#D32F2F");
-            //navpage.BarTextColor = Color.White;
 
-            // ¿Como engancha el viewModel?
-            MainPage = new MainView();
+            // var navPage = Locator.Current.GetService<MainView>();
+
+            var initialPage = new MainView();
+            initialPage.ViewModel = new MainViewModel();
+
+            MainPage = initialPage;
         }
 
         protected override void OnStart()

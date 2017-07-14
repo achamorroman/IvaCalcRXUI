@@ -31,8 +31,6 @@ namespace IvaCalcReactUI.ViewModels
         public void NavigateToVatList()
         {
             Navigator.Push(new VatListViewModel(_amount, _units));
-
-            // HostScreen.Router.Navigate.Execute(new DetailViewModel(item)).Subscribe();
         }
 
     }

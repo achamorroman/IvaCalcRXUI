@@ -21,12 +21,12 @@ namespace IvaCalcReactUI.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
-
 #if DEBUG
             UISleuth.Inspector.Init();
             // optional
             UISleuth.Inspector.ShowAcceptingConnections();
 #endif
+
         }
     }
 }

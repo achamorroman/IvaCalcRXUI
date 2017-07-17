@@ -6,12 +6,95 @@
                           xmlns:rxui="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
                           xmlns:viewModels="clr-namespace:IvaCalcReactUI.ViewModels;assembly=IvaCalcReactUI"
                           Title="Detalle de tipos de IVA">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="headerLabel" TargetType="Label">
+        <Setter Property="BackgroundColor" Value="#0D3753"/>
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="End" />
+      </Style>
+      <Style x:Key="orangeButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#E8AD00"/>
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="BorderRadius" Value="0"/>
+        <Setter Property="FontSize" Value="40" />
+      </Style>
+    </ResourceDictionary>
+  </ContentPage.Resources>
   <StackLayout>
 
-    <Label x:Name="Amount"></Label>
-    <Label x:Name="Units"></Label>
+    <!--<Label Text="Calculadora de IVA" FontSize="20" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+        <Label Text="Introduzca importe" BackgroundColor="#0D3753"></Label>
+        <Entry Keyboard="Numeric" FontSize="40" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"></Entry>
+        <Label Text="Introduzca unidades" BackgroundColor="#0D3753"></Label>
+        <Entry Keyboard="Numeric" FontSize="40" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"></Entry>-->
 
-    <Label Text="SECOND VIEW"></Label>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Label Text="Calculadora de IVA" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+      <Label Text="Importe introducido" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="End" />
+      <Entry x:Name="Amount" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Text="150,00"/>
+      <Label Text="Unidades introducidas" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="End" />
+      <Entry x:Name="Units" Keyboard="Numeric" Grid.Row="2" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Text="1"/>
+      <ListView x:Name="VatInfoListView" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding .}" >
+        <ListView.Header>
+          <Grid ColumnSpacing="0" Padding="0,20,0,0">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Label Text="% IVA" Grid.Row="0" Grid.Column="0" Style="{StaticResource headerLabel}" />
+            <Label Text="Incluido" Grid.Row="0" Grid.Column="1" Style="{StaticResource headerLabel}"  />
+            <Label Text="Base" Grid.Row="0" Grid.Column="2" Style="{StaticResource headerLabel}"  />
+            <Label Text="I.Iva" Grid.Row="0" Grid.Column="3" Style="{StaticResource headerLabel}"  />
+            <Label Text="Total" Grid.Row="0" Grid.Column="4" Style="{StaticResource headerLabel}"  />
+            <Label Text="" Grid.Row="0" Grid.Column="5" Style="{StaticResource headerLabel}"  />
+          </Grid>
+        </ListView.Header>
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <Grid ColumnSpacing="0" Padding="0,0,0,0">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding VatRate,StringFormat='{0:N}' }" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" />
+                <Label Text="{Binding VatIncludedForHumans}" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="End" />
+                <Label Text="{Binding VatBase,StringFormat='{0:N}'}" Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center" HorizontalTextAlignment="End" />
+                <Label Text="{Binding VatAmount,StringFormat='{0:N}'}" Grid.Row="0" Grid.Column="3" VerticalTextAlignment="Center" HorizontalTextAlignment="End" />
+                <Label Text="{Binding TotalAmount,StringFormat='{0:N}'}" Grid.Row="0" Grid.Column="4" VerticalTextAlignment="Center" HorizontalTextAlignment="End" />
+              </Grid>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </Grid>
   </StackLayout>
 
 </rxui:ReactiveContentPage>

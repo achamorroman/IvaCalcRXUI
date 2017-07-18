@@ -42,7 +42,7 @@
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
-      <Label Text="Calculadora de IVA" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+      <Label Text="Detalle de IVA" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalTextAlignment="Center" />
       <Label Text="Importe introducido" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="End" />
       <Entry x:Name="Amount" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Text="150,00"/>
       <Label Text="Unidades introducidas" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" HorizontalTextAlignment="End" />

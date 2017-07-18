@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IvaCalcReactUI.Services.Navigation;
+using IvaCalcReactUI.Services.VAT;
 using IvaCalcReactUI.ViewModels;
 using IvaCalcReactUI.Views;
 using ReactiveUI;
@@ -18,6 +19,7 @@ namespace IvaCalcReactUI
         {
             // Services
             Locator.CurrentMutable.RegisterLazySingleton(() => new NavigationService(), typeof(INavigationService));
+            Locator.CurrentMutable.RegisterLazySingleton(() => new VatService(), typeof(IVatService));
 
             // Views and ViewModels
             Locator.CurrentMutable.RegisterLazySingleton(() => new MainView(), typeof(IViewFor<MainViewModel>));

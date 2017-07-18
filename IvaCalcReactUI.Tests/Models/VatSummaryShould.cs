@@ -2,7 +2,7 @@ using System.Linq;
 using IvaCalcReactUI.Models;
 using NUnit.Framework;
 
-namespace IvaCalcReactUI.Tests
+namespace IvaCalcReactUI.Tests.Models
 {
     [TestFixture]
     public class VatSummaryShould

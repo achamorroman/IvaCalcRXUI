@@ -24,10 +24,7 @@ namespace IvaCalcReactUI.ViewModels
 
         public MainViewModel()
         {
-            // Navegación?
-            ComputeVatCommand = ReactiveCommand.Create(() => 
-                                                      Navigator.Push(new VatListViewModel(_amount, _units)
-                                                      ));
+            ComputeVatCommand = ReactiveCommand.Create(() => Navigator.Push(new VatListViewModel(_amount, _units)));
         }
 
     }

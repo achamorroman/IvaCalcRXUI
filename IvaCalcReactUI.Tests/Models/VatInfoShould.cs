@@ -1,12 +1,7 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using IvaCalcReactUI.Models;
+﻿using IvaCalcReactUI.Models;
+using NUnit.Framework;
 
-
-namespace IvaCalcReactUI.Tests
+namespace IvaCalcReactUI.Tests.Models
 {
     [TestFixture]
     public class VatInfoShould

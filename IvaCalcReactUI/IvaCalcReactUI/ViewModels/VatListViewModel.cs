@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using IvaCalcReactUI.Models;
 using IvaCalcReactUI.Services.VAT;
 using IvaCalcReactUI.ViewModels.Base;
+using System.Threading.Tasks;
 using ReactiveUI;
 using Splat;
 
@@ -21,6 +22,8 @@ namespace IvaCalcReactUI.ViewModels
 
             _vatService = vatService ?? Locator.Current.GetService<IVatService>();
 
+            Vats = new ReactiveList<VatInfo>();
+
             // TODO sustituir llamada por método y ReactiveCommand
             var computedVats = _vatService.ComputeVat(Amount, Units);
             _vats.AddRange(computedVats);
@@ -35,7 +38,9 @@ namespace IvaCalcReactUI.ViewModels
             //    .DisposeWith(this.Disposables);
         }
 
-        private void LoadData(double amount, int units)
+        public ReactiveCommand LoadVats { get; protected set; }
+
+        private async Task LoadData(double amount, int units)
         {
             var computedVats = _vatService.ComputeVat(Amount, Units);
             Vats = new ReactiveList<VatInfo>(computedVats);

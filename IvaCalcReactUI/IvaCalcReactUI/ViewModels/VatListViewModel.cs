@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using IvaCalcReactUI.Models;
@@ -13,23 +14,25 @@ namespace IvaCalcReactUI.ViewModels
     {
         private readonly IVatService _vatService;
 
-        public decimal Amount { get; }
+        public double Amount { get; }
         public int Units { get; }
 
-        private ReactiveList<VatInfo> _vats;
+        private ReactiveList<VatInfo> _vats = new ReactiveList<VatInfo>();
         private VatInfo _selectedItem;
 
-        public VatListViewModel(decimal amount, int units, IVatService vatService = null)
+        public VatListViewModel(double amount, int units, IVatService vatService = null)
         {
             Amount = amount;
             Units = units;
 
             _vatService = vatService ?? Locator.Current.GetService<IVatService>();
 
+            var computedVats = _vatService.ComputeVat(Amount, Units);
+            _vats.AddRange(computedVats);
+
             // TODO habilitar cálculos al modificar Amount o Units
 
-            // TODO: Carga del listview de resultados
-
+            // TODO selección del elemento del listview
             // Selected Item and navigation
             //this.WhenAnyValue(x => x.SelectedItem)
             //    .Where(x => x != null)

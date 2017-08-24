@@ -5,8 +5,8 @@ namespace IvaCalcReactUI.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private decimal _amount;
-        public decimal Amount
+        private double _amount;
+        public double Amount
         {
             get { return _amount; }
             set { this.RaiseAndSetIfChanged(ref _amount, value); }

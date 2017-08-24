@@ -23,15 +23,21 @@ namespace IvaCalcReactUI.Views
             this.WhenActivated((CompositeDisposable disposables) =>
             {
                 // Amount text
-                this.OneWayBind(this.ViewModel,
+                this.Bind(this.ViewModel,
                         vm => vm.Amount,
                         view => view.Amount.Text)
                     .DisposeWith(disposables);
 
                 // Units text
-                this.OneWayBind(this.ViewModel,
+                this.Bind(this.ViewModel,
                         vm => vm.Units,
                         view => view.Units.Text)
+                    .DisposeWith(disposables);
+
+                // Computed vats list
+                this.OneWayBind(ViewModel,
+                        vm => vm.Vats,
+                        view => view.VatInfoListView.ItemsSource)
                     .DisposeWith(disposables);
 
             });

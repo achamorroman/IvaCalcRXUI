@@ -1,7 +1,10 @@
-﻿namespace IvaCalcReactUI.Services.VAT
+﻿using System.Collections.Generic;
+using IvaCalcReactUI.Models;
+
+namespace IvaCalcReactUI.Services.VAT
 {
     public interface IVatService
     {
-        void ComputeVat();
+        List<VatInfo> ComputeVat(double amount, int units);
     }
 }

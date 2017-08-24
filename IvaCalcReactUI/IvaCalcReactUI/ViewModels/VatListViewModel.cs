@@ -14,23 +14,18 @@ namespace IvaCalcReactUI.ViewModels
     {
         private readonly IVatService _vatService;
 
-        public double Amount { get; }
-        public int Units { get; }
-
-        private ReactiveList<VatInfo> _vats = new ReactiveList<VatInfo>();
-        private VatInfo _selectedItem;
-
         public VatListViewModel(double amount, int units, IVatService vatService = null)
         {
-            Amount = amount;
-            Units = units;
+            _amount = amount;
+            _units = units;
 
             _vatService = vatService ?? Locator.Current.GetService<IVatService>();
 
+            // TODO sustituir llamada por método y ReactiveCommand
             var computedVats = _vatService.ComputeVat(Amount, Units);
             _vats.AddRange(computedVats);
 
-            // TODO habilitar cálculos al modificar Amount o Units
+            // TODO habilitar cálculos al modificar Amount o Units (llamada a método)
 
             // TODO selección del elemento del listview
             // Selected Item and navigation
@@ -40,12 +35,35 @@ namespace IvaCalcReactUI.ViewModels
             //    .DisposeWith(this.Disposables);
         }
 
+        private void LoadData(double amount, int units)
+        {
+            var computedVats = _vatService.ComputeVat(Amount, Units);
+            Vats = new ReactiveList<VatInfo>(computedVats);
+        }
+
+        private double _amount;
+        public double Amount
+        {
+            get { return _amount; }
+            set { this.RaiseAndSetIfChanged(ref _amount, value); }
+        }
+
+        private int _units;
+        public int Units
+        {
+            get { return _units; }
+            set { this.RaiseAndSetIfChanged(ref _units, value); }
+        }
+
+
+        private ReactiveList<VatInfo> _vats = new ReactiveList<VatInfo>();
         public ReactiveList<VatInfo> Vats
         {
             get { return _vats; }
             set { this.RaiseAndSetIfChanged(ref _vats, value); }
         }
 
+        private VatInfo _selectedItem;
         public VatInfo SelectedItem
         {
             get { return _selectedItem; }

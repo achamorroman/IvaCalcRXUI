@@ -31,6 +31,7 @@
         <Label Text="Introduzca unidades" BackgroundColor="#0D3753"></Label>
         <Entry Keyboard="Numeric" FontSize="40" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"></Entry>-->
 
+    <Label x:Name="TotalAmount" Text="" VerticalOptions="Center" HorizontalTextAlignment="End" />
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>

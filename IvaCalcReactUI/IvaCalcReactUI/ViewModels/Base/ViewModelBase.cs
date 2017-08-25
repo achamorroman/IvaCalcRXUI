@@ -22,9 +22,23 @@ namespace IvaCalcReactUI.ViewModels.Base
             Navigator = navigationService ?? Locator.Current.GetService<INavigationService>();
         }
 
+        private string _ErrorMessage;
+        public string ErrorMessage
+        {
+            get { return this._ErrorMessage; }
+            set { this.RaiseAndSetIfChanged(ref _ErrorMessage, value); }
+        }
+
         public void Dispose()
         {
             Disposables?.Dispose();
+        }
+
+        protected void LogException(Exception ex, string errorMessage)
+        {
+            this.Log().Write(ex.Message, LogLevel.Error);
+            this.Log().Write(ex.StackTrace, LogLevel.Error);
+            ErrorMessage = errorMessage;
         }
     }
 }

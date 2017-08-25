@@ -14,11 +14,9 @@ namespace IvaCalcReactUI.Services.VAT
 
         public VatService() { }
 
-        public List<VatInfo> ComputeVat(double amount, int units)
+        public List<VatInfo> ComputeVat(double amount)
         {
-            var totalAmount = amount * units;
-
-            InflateRatesDictionary(totalAmount);
+            InflateRatesDictionary(amount);
             PopulateVatInfos(_vatRates);
 
             return _vatInfos;

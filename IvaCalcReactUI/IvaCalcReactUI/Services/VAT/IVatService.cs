@@ -5,6 +5,6 @@ namespace IvaCalcReactUI.Services.VAT
 {
     public interface IVatService
     {
-        List<VatInfo> ComputeVat(double amount, int units);
+        List<VatInfo> ComputeVat(double amount);
     }
 }

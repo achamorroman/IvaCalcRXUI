@@ -28,20 +28,23 @@ namespace IvaCalcReactUI.ViewModels
             LoadData(_amount * _units);
 
             // Command
-            this.LoadVats = ReactiveCommand.Create<double>((total) => LoadData(total)).DisposeWith(this.Disposables);
+            this.LoadVats = ReactiveCommand.Create<double>((totalAmount) => LoadData(totalAmount)).DisposeWith(this.Disposables);
 
             // Handle erros
             this.LoadVats.ThrownExceptions
                 .Subscribe((obj) => this.LogException(obj, "Error computing vats"))
                 .DisposeWith(this.Disposables);
 
-            // Al modificar Amount ¿Como paso total (amount * units)?
+            // Al modificar Amount ¿Como paso total (amount * units)? ¿como actualizo el label?
+            // this.WhenAnyValue(x => x.Amount, x => x.Units)
+
+            // Al modificar Amount. Funciona.
             this.WhenAnyValue(x => x.Amount)
-                .Select(x => x)
-                .DistinctUntilChanged()
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .InvokeCommand(LoadVats)
-                .DisposeWith(this.Disposables);
+                            .Select(x => x)
+                            .DistinctUntilChanged()
+                            .ObserveOn(RxApp.MainThreadScheduler)
+                            .InvokeCommand(LoadVats)
+                            .DisposeWith(this.Disposables);
 
             // Al modificar Units, llamar al método. ¿cómo?
             //this.WhenAnyValue(x => x.Units)
@@ -81,10 +84,11 @@ namespace IvaCalcReactUI.ViewModels
             set { this.RaiseAndSetIfChanged(ref _units, value); }
         }
 
-        private double _totalAmount;
+
+        readonly ObservableAsPropertyHelper<double> _totalAmount;
         public double TotalAmount
         {
-            get { return _amount * _units; }
+            get { return _totalAmount.Value; }
         }
 
         private ReactiveList<VatInfo> _vats = new ReactiveList<VatInfo>();

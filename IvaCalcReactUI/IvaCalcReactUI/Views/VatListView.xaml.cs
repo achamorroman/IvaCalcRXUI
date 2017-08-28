@@ -35,7 +35,7 @@ namespace IvaCalcReactUI.Views
                     .DisposeWith(disposables);
 
                 // Total Amount label
-                this.Bind(this.ViewModel,
+                this.OneWayBind(this.ViewModel,
                         vm => vm.TotalAmount,
                         view => view.TotalAmount.Text)
                     .DisposeWith(disposables);

@@ -19,7 +19,6 @@ namespace IvaCalcReactUI.ViewModels
         {
             Amount = amount;
             Units = units;
-            TotalAmount = Amount * Units;
 
             _vatService = vatService ?? Locator.Current.GetService<IVatService>();
 
@@ -36,26 +35,21 @@ namespace IvaCalcReactUI.ViewModels
                 .Subscribe((obj) => this.LogException(obj, "Error computing vats"))
                 .DisposeWith(this.Disposables);
 
-            // Al modificar Amount
+            // Al modificar Amount ¿Como paso total (amount * units)?
             this.WhenAnyValue(x => x.Amount)
-                .Select(x => x)
-                .DistinctUntilChanged()
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Do(a => TotalAmount = a * Units);
-
-            // Al modificar Units
-            this.WhenAnyValue(x => x.Units)
-                .Select(x => x)
-                .DistinctUntilChanged()
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Do(u => TotalAmount = Amount * u);
-
-            this.WhenAnyValue(x => x.TotalAmount)
                 .Select(x => x)
                 .DistinctUntilChanged()
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .InvokeCommand(LoadVats)
                 .DisposeWith(this.Disposables);
+
+            // Al modificar Units, llamar al método. ¿cómo?
+            //this.WhenAnyValue(x => x.Units)
+            //    .Select(x => x)
+            //    .DistinctUntilChanged()
+            //    .ObserveOn(RxApp.MainThreadScheduler)
+            //    .InvokeCommand(LoadVats)
+            //    .DisposeWith(this.Disposables);
 
             // TODO selección del elemento del listview
             // Selected Item and navigation
@@ -90,8 +84,7 @@ namespace IvaCalcReactUI.ViewModels
         private double _totalAmount;
         public double TotalAmount
         {
-            get { return _totalAmount; }
-            set { this.RaiseAndSetIfChanged(ref _totalAmount, value); }
+            get { return _amount * _units; }
         }
 
         private ReactiveList<VatInfo> _vats = new ReactiveList<VatInfo>();
